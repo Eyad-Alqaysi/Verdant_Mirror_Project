@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Plant Simulation</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="model-container"></div>
+        <header class="left-header">
+            <h1>3D Plant Simulation</h1>
+            <div class="chatgpt-recommendations">
+                <h2>ChatGPT Recommendations</h2>
+                <textarea id="chatgpt-output" readonly></textarea>
+            </div>
+        </header>
+        <div class="right-panel">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="input1">Temperature (°C)</label>
+                    <input type="number" id="input1" placeholder="Enter temperature">
+                </div>
+                <div class="input-group">
+                    <label for="input2">Humidity (%)</label>
+                    <input type="number" id="input2" placeholder="Enter humidity">
+                </div>
+                <div class="input-group">
+                    <label for="input3">Light Intensity (lux)</label>
+                    <input type="number" id="input3" placeholder="Enter light intensity">
+                </div>
+                <div class="input-group">
+                    <label for="input4">CO2 Level (ppm)</label>
+                    <input type="number" id="input4" placeholder="Enter CO2 level">
+                </div>
+                <div id="prediction-result" style="color: black; font-weight: bold;"></div> <!-- New div for prediction result -->
+
+                <button id="simulate">Analysis</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/EXRLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
