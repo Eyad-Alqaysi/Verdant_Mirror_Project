@@ -307,19 +307,19 @@ document.getElementById('simulate').addEventListener('click', async function() {
     console.log('Button clicked');
 
     const temperature = parseFloat(document.getElementById('input1').value);
-    const humidity = parseFloat(document.getElementById('input2').value);
-    const lightIntensity = parseFloat(document.getElementById('input3').value);
-    const co2Level = parseFloat(document.getElementById('input4').value);
+    const soilType = parseInt(document.getElementById('input2').value);
+    const annualRainfall = parseFloat(document.getElementById('input3').value);
+    const drySeasonDuration = parseInt(document.getElementById('input4').value);
 
     const data = {
         temperature: temperature,
-        humidity: humidity,
-        light_intensity: lightIntensity,
-        co2_level: co2Level
+        soil_type: soilType,
+        annual_rainfall: annualRainfall,
+        dry_season_duration: drySeasonDuration
     };
 
     console.log('Sending data to server for prediction:', data);
-
+    
     try {
         // First, get the prediction
         const predictionResponse = await fetch('http://127.0.0.1:5000/predict', {

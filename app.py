@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.preprocessing import StandardScaler
+from joblib import load
 import numpy as np
 from openai import OpenAI
 import os
@@ -10,26 +9,11 @@ app = Flask(__name__)
 CORS(app)
 
 # Set up OpenAI client
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="")
 
-# Mock data for training
-X_train = np.array([
-    [20, 50, 5000, 400],
-    [22, 55, 5500, 450],
-    [25, 60, 6000, 500],
-    [27, 65, 6500, 550],
-    [30, 70, 7000, 600],
-    [32, 75, 7500, 650],
-])
-
-y_train = np.array([0, 0, 1, 1, 2, 2])  # 0: Unsustainable, 1: Moderate, 2: Sustainable
-
-# Initialize and train the classifier
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-
-clf = DecisionTreeClassifier(random_state=42)
-clf.fit(X_train_scaled, y_train)
+# Load the Random Forest Classifier model
+model_path = 'static/rfc_model.joblib'
+rfc_model = load(model_path)
 
 @app.route('/')
 def home():
@@ -40,13 +24,12 @@ def predict():
     data = request.json
     features = np.array([[
         data['temperature'],
-        data['humidity'],
-        data['light_intensity'],
-        data['co2_level']
+        data['soil_type'],
+        data['annual_rainfall'],
+        data['dry_season_duration']
     ]])
     
-    features_scaled = scaler.transform(features)
-    prediction = clf.predict(features_scaled)[0]
+    prediction = rfc_model.predict(features)[0]
     
     class_names = ['Unsustainable', 'Moderate', 'Sustainable']
     result = class_names[prediction]
@@ -68,7 +51,13 @@ def get_chatgpt_recommendation(prediction, data):
     if not client.api_key:
         return None, "OpenAI API key is not set. Please configure the API key."
 
-    prompt = f"Given a plant growth prediction of {prediction} with temperature {data['temperature']}°C, humidity {data['humidity']}%, light intensity {data['light_intensity']} lux, and CO2 level {data['co2_level']} ppm, provide a brief recommendation for improving or maintaining plant health."
+    prompt = f"""Given a plant growth prediction of {prediction} with the following conditions:
+    - Temperature: {data['temperature']}°C
+    - Soil Type: {data['soil_type']}
+    - Annual Rainfall: {data['annual_rainfall']} mm
+    - Dry Season Duration: {data['dry_season_duration']} months
+    
+    Provide a brief recommendation for improving or maintaining plant health."""
     
     try:
         response = client.chat.completions.create(
