@@ -25,13 +25,13 @@ Verdant Mirror is a web-based application that combines advanced machine learnin
 
 ## Project Structure
 
-\`\`\`bash
+```bash
 ├── index.html         # Main HTML file
 ├── styles.css         # CSS for styling the web interface
 ├── main.js            # JavaScript for 3D rendering and interaction
 ├── app.py             # Flask backend server
 └── README.md          # Project documentation
-\`\`\`
+```
 
 ## Getting Started
 
