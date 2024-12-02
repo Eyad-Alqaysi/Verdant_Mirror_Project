@@ -56,7 +56,7 @@ Verdant Mirror is a web-based application that combines advanced machine learnin
    pip install flask scikit-learn openai flask-cors
    ```
 
-3. Set up your OpenAI API key in the \`app.py\` file:
+3. Set up your OpenAI API key in the `app.py` file:
    ```python
    client = OpenAI(api_key="your-openai-api-key")
    ```
