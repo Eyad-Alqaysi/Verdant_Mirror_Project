@@ -46,29 +46,29 @@ Verdant Mirror is a web-based application that combines advanced machine learnin
 ### Installation
 
 1. Clone the repository:
-   \`\`\`bash
+   ```bash
    git clone https://github.com/your-username/verdant-mirror.git
    cd verdant-mirror
-   \`\`\`
+   ```
 
 2. Install the required Python packages:
-   \`\`\`bash
+   ```bash
    pip install flask scikit-learn openai flask-cors
-   \`\`\`
+   ```
 
 3. Set up your OpenAI API key in the \`app.py\` file:
-   \`\`\`python
+   ```python
    client = OpenAI(api_key="your-openai-api-key")
-   \`\`\`
+   ```
 
 ### Running the Application
 
 1. Start the Flask server:
-   \`\`\`bash
+   ```bash
    python app.py
-   \`\`\`
+   ```
 
-2. Open \`index.html\` in your web browser to interact with the application.
+2. Open `index.html` in your web browser to interact with the application.
 
 ### Usage
 
